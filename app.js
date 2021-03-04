@@ -1,5 +1,3 @@
-//----------------------- G O O D   L U C K -------------------------------//
-
 // select all elements by id
 const start = document.getElementById("start");
 const quiz = document.getElementById("quiz");
