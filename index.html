@@ -10,8 +10,30 @@
     <title>Lampo-Test</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body onload = "myLoader()" style="margin: 0;">
-    <div id="loader">
+  <body style="margin: 0;">
+    
+    <div class="login-box" style="display:block">
+      <h2>Login</h2>
+      <form id="form">
+        <div class="user-box">
+          <input type="text" name="username" required="">
+          <label>Username</label>
+        </div>
+        <div class="user-box">
+          <input type="password" name="password" required="">
+          <label>Password</label>
+        </div>
+        <a href="#" id="submit">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Submit
+        </a>
+      </form>
+    </div>
+
+    <div id="loader" style="display:none">
       <p class="fade-in">
         <b>Benvenuti al quiz di Lampo!</b><br /><br />
         Se siete qui, vuol dire che sotto sotto, (ma forse nemmeno così sotto) vi voglio bene.<br />
@@ -37,7 +59,7 @@
       </p>
       <button class="choice" id="starter" onclick="showPage()" style="display:none; margin:auto;"> Ho capito...Ho letto tutto... Viva la vita.</button> 
     </div>
-    <div id="container">
+    <div id="container" style="display:none">
       <button id="start">Inizia il quiz!</button>
       <div id="quiz" style="display: none;">
         <div id="question"></div>
@@ -60,9 +82,6 @@
       <br>
       <button class="choice" id="continue" onclick="nextPage()"> Sono soddisfatissimo, ti prego Lampo...continua il tuo meraviglioso quiz...</button> 
     </div>
-    <footer>
-      Copyright © 2020 - All rights Reserved - Designed by AhsanParadise, heavily (and EXTRAORDINARILY) modified by Lampo
-    </footer>
     <script src="app.js"></script>
   </body>
 </html>

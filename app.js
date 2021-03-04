@@ -12,6 +12,11 @@ const choiceD = document.getElementById("D");
 const counter = document.getElementById("counter");
 const progress = document.getElementById("progress");
 const scoreDiv = document.getElementById("scoreContainer");
+const form = document.getElementById("form");
+const submit = document.getElementById("submit");
+const loader = document.getElementById("loader");
+const container = document.getElementById("container");
+
 
 // create questions
 let questions = [
@@ -170,6 +175,19 @@ let questions = [
     correct: "C",
   }
 ];
+
+let username; let password;
+
+submit.addEventListener('click',()=>{
+  username = form.username.value;
+  password = form.password.value;
+  if (username==="Lampo" && password === "miao"){
+    loader.style.display = "block";
+    container.style.display = "block";
+    document.getElementsByClassName("login-box")[0].style.display="none"
+    myLoader();
+  }
+});
 
 function shuffle(a) {
   var j, x, i;
@@ -370,7 +388,6 @@ function cheaterBehaviour() {
     music.pause();
     clearPage()
     document.getElementById("after").style.display = "none";
-    document.querySelector("footer").style = "display: none";
     end.src = "Stuffs/music/END.m4a";
     end.play();
     document.querySelector("body").innerHTML+=
