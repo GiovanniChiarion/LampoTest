@@ -353,7 +353,7 @@ function myLoader() {
     el.style.display = "block";//opacity:0; animation: fadeIn 3s ease-in forwards;
     el.style.opacity = 0;
     el.style.animation = "fadeIn 3s ease-in forwards";
-  }, 5000)
+  }, 20000)
 };
 
 
