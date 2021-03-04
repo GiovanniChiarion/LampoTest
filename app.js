@@ -220,6 +220,7 @@ function startQuiz() {
   renderProgress();
   renderCounter();
   TIMER = setInterval(renderCounter, 1000); // 1000ms = 1s
+  // window.addEventListener("blur", cheaterBehaviour);
   window.addEventListener("blur", cheaterBehaviour);
 }
 
@@ -330,10 +331,13 @@ var myVar;
 
 function myLoader() {
   myVar = setTimeout(function () {
-    document.getElementById('starter').style.display = "block";//opacity:0; animation: fadeIn 3s ease-in forwards;
-}, 5000)
+    let el = document.getElementById('starter');
+    el.style.display = "block";//opacity:0; animation: fadeIn 3s ease-in forwards;
+    el.style.opacity = 0;
+    el.style.animation = "fadeIn 3s ease-in forwards";
+  }, 5000)
 };
-  
+
 
 function showPage() {
   document.getElementById("loader").style.display = "none";
@@ -356,13 +360,29 @@ function nextPage() {
   a.style.display = "none";
   document.getElementById("container").style.display = "block";
 }
-function cheaterBehaviour(){
+let end = new Audio();
+
+function cheaterBehaviour() {
+  window.removeEventListener("blur", cheaterBehaviour);
+  window.addEventListener("focus", function fucked() {
+    window.removeEventListener("focus",fucked)
     console.log('YOU CHEATED, BITCH!');
     music.pause();
     clearPage()
     document.getElementById("after").style.display = "none";
     document.querySelector("footer").style = "display: none";
-    let end = new Audio();
     end.src = "Stuffs/music/END.m4a";
     end.play();
+    document.querySelector("body").innerHTML+=
+    `
+    <p class="fade-in" id="sameloader">
+    <b>Peccato!</b><br /><br />
+    Da un lato sono molto divertito, dall'altro un po' deluso.<br />
+    Ti avevo avvertito di non barare o anche solo di <br />
+    non cliccare da qualche altra parte in questo caso, <br />
+    la tua curiosità è stata la tua rovina.<br /><br />
+    <b>Addio per sempre.</b> <br />
+    </p>
+    `;
+  })
 }

@@ -6,7 +6,7 @@
   font-family: "Concert One", cursive;
   font-size: 18px;
 }
-#loader {
+#loader, #sameloader {
   position: absolute;
   top: 0;
   left: 0;
