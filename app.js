@@ -174,15 +174,21 @@ let questions = [
   }
 ];
 
-let username; let password;
+let username, password, data, credentials;
+let qa = [];
 
-submit.addEventListener('click',()=>{
+
+submit.addEventListener('click', () => {
   username = form.username.value;
   password = form.password.value;
-  if (username==="Lampo" && password === "miao"){
+  if (username === "Lampo" && password === "miao") {
+    credentials = {
+      Name: username,
+      Password: password
+    };
     loader.style.display = "block";
     container.style.display = "block";
-    document.getElementsByClassName("login-box")[0].style.display="none"
+    document.getElementsByClassName("login-box")[0].style.display = "none"
     myLoader();
   }
 });
@@ -259,6 +265,10 @@ function renderCounter() {
     // change progress color to red
     answerIsWrong();
     if (runningQuestion < lastQuestion) {
+      qa.push({
+        question: questions[runningQuestion].question,
+        answer: 'TEMPO SCADUTO!'
+      });
       runningQuestion++;
       renderQuestion();
     } else {
@@ -282,6 +292,10 @@ function checkAnswer(answer) {
     // change progress color to red
     answerIsWrong();
   }
+  qa.push({
+    question: questions[runningQuestion].question,
+    answer: questions[runningQuestion]['choice' + answer]
+  });
   count = 0;
 
   // AGGIUNTA PER L'AFTER
@@ -312,7 +326,7 @@ function answerIsCorrect() {
 function answerIsWrong() {
   document.getElementById(runningQuestion).style.backgroundColor = "#f00";
   var music = new Audio();
-  music.src = "Stuffs/music/Huh.mp3";
+  music.src = "Stuffs/music/nondire.mp3";
   music.play();
 }
 
@@ -340,6 +354,8 @@ function scoreRender() {
 
   scoreDiv.innerHTML = "<img src=" + img + ">";
   scoreDiv.innerHTML += "<p>" + scorePerCent + "%</p>";
+  data = [credentials, qa];
+  // SEND DATA!
 }
 
 //////////////////////////////////////////////////////
@@ -348,7 +364,7 @@ var myVar;
 function myLoader() {
   myVar = setTimeout(function () {
     let el = document.getElementById('starter');
-    el.style.display = "block";//opacity:0; animation: fadeIn 3s ease-in forwards;
+    el.style.display = "block";
     el.style.opacity = 0;
     el.style.animation = "fadeIn 3s ease-in forwards";
   }, 20000)
@@ -380,16 +396,18 @@ let end = new Audio();
 
 function cheaterBehaviour() {
   window.removeEventListener("blur", cheaterBehaviour);
+  data = [credentials, qa, "CHEATER!!"];
+  // SEND DATA!
   window.addEventListener("focus", function fucked() {
-    window.removeEventListener("focus",fucked)
+    window.removeEventListener("focus", fucked)
     console.log('YOU CHEATED, BITCH!');
     music.pause();
     clearPage()
     document.getElementById("after").style.display = "none";
     end.src = "Stuffs/music/END.m4a";
     end.play();
-    document.querySelector("body").innerHTML+=
-    `
+    document.querySelector("body").innerHTML +=
+      `
     <p class="fade-in" id="sameloader">
     <b>Peccato!</b><br /><br />
     Da un lato sono molto divertito, dall'altro un po' deluso.<br />
