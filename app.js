@@ -383,7 +383,7 @@ function myLoader() {
     el.style.display = "block";
     el.style.opacity = 0;
     el.style.animation = "fadeIn 3s ease-in forwards";
-  }, 1000)
+  }, 10000)
 };
 
 
