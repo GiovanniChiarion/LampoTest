@@ -84,7 +84,7 @@ let questions = [
     choiceD: "Nei sentieri dell'amore",
     correct: "D",
     after: {
-      embed: '<video width="320" height="240" controls autoplay><source src="Stuffs/vid/sentieri.mp4" type="video/mp4">Your browser does not support the video tag.</video>'
+      embed: '<video width="320" height="240" controls><source src="Stuffs/vid/sentieri.mp4" type="video/mp4">Your browser does not support the video tag.</video>'
     }
   },
   {
@@ -332,6 +332,10 @@ function answerIsWrong() {
 
 // score render
 function scoreRender() {
+  clearPage();
+  document.getElementById("continue").style.display = "none";
+  document.getElementById("after").style.display = "none";
+  window.removeEventListener('blur', cheaterBehaviour);
   scoreDiv.style.display = "block";
   var music = new Audio();
   music.src = "Stuffs/music/GameOver.mp3";
@@ -352,10 +356,22 @@ function scoreRender() {
             ? "Stuffs/img/2.png"
             : "Stuffs/img/1.png";
 
-  scoreDiv.innerHTML = "<img src=" + img + ">";
-  scoreDiv.innerHTML += "<p>" + scorePerCent + "%</p>";
-  data = [credentials, qa];
-  // SEND DATA!
+  // scoreDiv.innerHTML = "<img src=" + img + ">";
+  // scoreDiv.innerHTML += "<p>" + scorePerCent + "%</p>";
+  if (scorePerCent >= 80){
+    music.src = "Stuffs/music/win.m4a";
+    music.play();
+  }
+  let compliments = document.createElement('p');
+  compliments.style = "width: auto;height: auto;left: 1px;";
+  scoreDiv.appendChild(compliments);
+  compliments.innerText = "COMPLIMENTI, sei arrivato fino in fondo senza barare! Copia la stringa qui in alto e passala al sommo lampo!";
+  data = [credentials, qa, scorePerCent];
+  data = btoa(JSON.stringify(data));
+  var input = document.createElement('input'); 
+  input.type = "text"; 
+  scoreDiv.appendChild(input); 
+  input.value = data;
 }
 
 //////////////////////////////////////////////////////
@@ -367,7 +383,7 @@ function myLoader() {
     el.style.display = "block";
     el.style.opacity = 0;
     el.style.animation = "fadeIn 3s ease-in forwards";
-  }, 20000)
+  }, 1000)
 };
 
 
@@ -397,6 +413,7 @@ let end = new Audio();
 function cheaterBehaviour() {
   window.removeEventListener("blur", cheaterBehaviour);
   data = [credentials, qa, "CHEATER!!"];
+  data = btoa(JSON.stringify(data));
   // SEND DATA!
   window.addEventListener("focus", function fucked() {
     window.removeEventListener("focus", fucked)
@@ -417,5 +434,9 @@ function cheaterBehaviour() {
     <b>Addio per sempre.</b> <br />
     </p>
     `;
+    var input = document.createElement('input'); 
+    input.type = "text"; 
+    document.getElementById("sameloader").appendChild(input); 
+    input.value = data;
   })
 }
