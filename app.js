@@ -181,7 +181,7 @@ let qa = [];
 submit.addEventListener('click', () => {
   username = form.username.value;
   password = form.password.value;
-  if (username === "Grace" && password === "Carramba") {
+  if (username === "Speed" && password === "mazunna") {
     credentials = {
       Name: username,
       Password: password
